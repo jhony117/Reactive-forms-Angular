@@ -1,8 +1,8 @@
 <h2>Reactivos: Switches</h2>
 <hr>
 
-
-<form autocomplete="off">
+<!--? los parentesis en los atributos son para eventos (ngSubmit)  -->
+<form autocomplete="off" (ngSubmit)="onSave()" [formGroup]="myForm">
 
     <!-- Radio -->
     <div class="row mb-3">
@@ -13,7 +13,10 @@
                 <input class="form-check-input"
                        type="radio"
                        value="M"
-                       id="radioMasculino">
+                       id="radioMasculino"
+                       formControlName="gender"
+
+                       >
                 <label class="form-check-label" for="radioMasculino">
                   Masculino
                 </label>
@@ -23,7 +26,9 @@
                 <input class="form-check-input"
                        type="radio"
                        value="F"
-                       id="radioFemenino">
+                       id="radioFemenino"
+                       formControlName="gender"
+                       >
                 <label class="form-check-label" for="radioFemenino">
                   Femenino
                 </label>
@@ -40,7 +45,9 @@
             <div class="form-check form-switch mt-2">
                 <input class="form-check-input"
                        type="checkbox"
-                       id="flexSwitchCheckChecked">
+                       id="flexSwitchCheckChecked"
+                       formControlName="wantNotifications"
+                       >
                 <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
             </div>
 
@@ -54,12 +61,17 @@
             <div class="form-check">
                 <input class="form-check-input"
                        type="checkbox"
-                       id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
+                       id="flexCheckDefault"
+                        formControlName="termsAndConditions" >
+                <label class="form-check-label" for="flexCheckDefault"
+
+                >
                   Términos y condiciones de uso
                 </label>
               </div>
-              <span class="form-text text-danger">
+
+              <!-- isValiedField('termsAndConditions') -->
+              <span *ngIf="isValidTermsAndConditions()" class="form-text text-danger">
                  Debe de aceptar las condiciones de uso
               </span>
 
@@ -71,6 +83,7 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-primary float-end"
+
                     type="submit">
                 Guardar
             </button>
@@ -81,15 +94,15 @@
 
 
 <h5>Valor del formulario</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.value | json }}</pre>
 <br>
 
 <h5>Persona</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ person | json }}</pre>
 <br>
 
 <h5>Valid</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ myForm.valid | json }}</pre>
 
 <!-- <h5>Términos</h5> -->
 <!-- <pre>{{ myForm.controls?.terminos?.errors | json }}</pre> -->
